@@ -1,0 +1,118 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.whereby",
+    "module": "sdk",
+    "version": "0.0.4",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.5.0"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "2.1.3"
+          }
+        },
+        {
+          "group": "com.github.GrenderG",
+          "module": "Toasty",
+          "version": {
+            "requires": "1.5.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sdk-0.0.4.aar",
+          "url": "sdk-0.0.4.aar",
+          "size": 60368,
+          "sha512": "bcc95856d0ca6844a69f6210821b8bd47f6009e0b02c6c0bd52b9fce77be091ea7186f508e58f7afe078092cc514179a1aee74478233d35eb2b71582689bdb1b",
+          "sha256": "963c9ba8f697a96ca6601560428f0138eb2cac9747aaf6f6275275b02a928665",
+          "sha1": "d29adeaed91de9c6c1eb30dc1cece39831fca1e0",
+          "md5": "8fda85013601ee9c9a4df102c6d3c844"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.5.0"
+          }
+        },
+        {
+          "group": "androidx.constraintlayout",
+          "module": "constraintlayout",
+          "version": {
+            "requires": "2.1.3"
+          }
+        },
+        {
+          "group": "com.github.GrenderG",
+          "module": "Toasty",
+          "version": {
+            "requires": "1.5.2"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "sdk-0.0.4.aar",
+          "url": "sdk-0.0.4.aar",
+          "size": 60368,
+          "sha512": "bcc95856d0ca6844a69f6210821b8bd47f6009e0b02c6c0bd52b9fce77be091ea7186f508e58f7afe078092cc514179a1aee74478233d35eb2b71582689bdb1b",
+          "sha256": "963c9ba8f697a96ca6601560428f0138eb2cac9747aaf6f6275275b02a928665",
+          "sha1": "d29adeaed91de9c6c1eb30dc1cece39831fca1e0",
+          "md5": "8fda85013601ee9c9a4df102c6d3c844"
+        }
+      ]
+    }
+  ]
+}
