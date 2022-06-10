@@ -10,7 +10,6 @@
   <groupId>com.whereby</groupId>
   <artifactId>sdk</artifactId>
   <version>0.0.4</version>
-  <packaging>aar</packaging>
   <dependencies>
     <dependency>
       <groupId>androidx.appcompat</groupId>
