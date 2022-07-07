@@ -5,7 +5,7 @@ This repository contains the Whereby framework for Android platform. You will fi
 
 Other platforms: 
 - [iOS SDK](https://github.com/whereby/ios-sdk) with sample app in Swift
-- [Web SDK](https://github.com/whereby/browser-sdk)
+- [Browser SDK](https://github.com/whereby/browser-sdk)
 
 *Be informed that this is a beta version of the framework. For any comments, suggestions or questions, please reach out to our customer support: embedded@whereby.com* 
 
