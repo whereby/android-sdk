@@ -5,7 +5,7 @@ This repository contains the Whereby framework for Android platform. You will fi
 
 Other platforms: 
 - [iOS SDK](https://github.com/whereby/ios-sdk) with sample app in Swift
-- [Web SDK](https://github.com/whereby/browser-sdk)
+- [Browser SDK](https://github.com/whereby/browser-sdk)
 
 *Be informed that this is a beta version of the framework. For any comments, suggestions or questions, please reach out to our customer support: embedded@whereby.com* 
 
@@ -64,22 +64,20 @@ WherebyRoomFragment roomFragment = new WherebyRoomFragment();
 URL roomURL = new URL("https://...");
 ```
 
-3. Create a *WherebyRoom* that contains the configuration to be passed to the fragment
+3. Create a *WherebyRoomConfig* to be passed to the fragment
 ```
-WherebyRoom room = new WherebyRoom(roomURL);
+WherebyRoomConfig roomConfig = new WherebyRoomConfig(roomURL);
 ```
 
-4. Add room parameters (optional)
+Optionally, you can customize the room:
 ```
-WherebyRoomParameters roomParameters = new WherebyRoomParameters(); 
-roomParameters.setCameraEnabledAtStart(true);  
-roomParameters.setMicrophoneEnabledAtStart(true); 
-roomParameters.setDisplayName("Participant name");  
+roomConfig.setCameraEnabledAtStart(true);  
+roomConfig.setMicrophoneEnabledAtStart(true); 
+roomConfig.setDisplayName("Participant name");  
 // ...
-room.setParameters(roomParameters);
 ```
 
-5. Setup an asynchronous event listener (optional)
+4. Setup an asynchronous event listener (optional)
 
 This allows to receive events during the meeting through a list of callbacks methods:
 ```
@@ -99,16 +97,16 @@ roomFragment.setEventListener(new WherebyEventListener() {
 });  
 ```
 
-6. Send commands once the meeting has started (optional)
+5. Send commands once the meeting has started (optional)
 ```
-toggleCameraButton.setOnClickListener(view -> roomFragment.toggleCamera());  
-toggleMicrophoneButton.setOnClickListener(view -> roomFragment.toggleMicrophone());
+toggleCameraButton.setOnClickListener(view -> roomFragment.toggleCameraEnabled());  
+toggleMicrophoneButton.setOnClickListener(view -> roomFragment.toggleMicrophoneEnabled());
 ```
 
-7. Load the fragment with its arguments and join the meeting
+6. Load the fragment with its arguments and join the meeting
 ```
 Bundle bundle = new Bundle();  
-bundle.putSerializable(ROOM_ARGUMENT_KEY, room);  
+bundle.putSerializable(ROOM_CONFIG_KEY, roomconfig);  
 roomFragment.setArguments(bundle);  
 FragmentManager fragmentManager = getSupportFragmentManager();  
 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();  
@@ -117,7 +115,7 @@ fragmentTransaction.commit();
 roomFragment.join();
 ```
 
-8. Remove the fragment after the meeting has ended (optional)
+7. Remove the fragment after the meeting has ended (optional)
 ```
 FragmentManager fragmentManager = getSupportFragmentManager();  
 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();  
@@ -125,5 +123,6 @@ fragmentTransaction.remove(mRoomFragment);
 fragmentTransaction.commit();  
 mRoomFragment = null;
 ```
+
 
 
