@@ -124,5 +124,17 @@ fragmentTransaction.commit();
 mRoomFragment = null;
 ```
 
+8. Avoid the activity to be destroyed and re-created on screen rotation (recommended)
 
+In the `AndroidManifest`, add the following `androidConfig` for your activity
 
+```
+    <application
+        ...
+        <activity
+            ...
+            android:configChanges="orientation|screenSize">
+        </activity>
+    </application>
+
+```
