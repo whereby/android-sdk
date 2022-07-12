@@ -59,7 +59,7 @@ android {
     URL roomURL = new URL("https://...");
     ```
 
-3. Create a *WherebyRoomConfig* to be passed to the fragment:
+3. Create a *WherebyRoomConfig*:
     ```java
     WherebyRoomConfig roomConfig = new WherebyRoomConfig(roomURL);
     ```
@@ -71,9 +71,12 @@ android {
     roomConfig.setDisplayName("Participant name");  
     // ...
     ```
-4. Setup your `WherebyRoomFragment` object in your source file and layout:
+4. Setup your `WherebyRoomFragment` with its arguments in your source file and layout:
     ```java
     WherebyRoomFragment roomFragment = new WherebyRoomFragment();
+    Bundle bundle = new Bundle();  
+    bundle.putSerializable(ROOM_CONFIG_KEY, roomconfig);  
+    roomFragment.setArguments(bundle);  
     ```
     ```xml
     <FrameLayout  
@@ -105,11 +108,8 @@ android {
     toggleMicrophoneButton.setOnClickListener(view -> roomFragment.toggleMicrophoneEnabled());
     ```
 
-5. Load the fragment with its arguments and join the meeting:
+5. Load the fragment and join the meeting:
     ```java
-    Bundle bundle = new Bundle();  
-    bundle.putSerializable(ROOM_CONFIG_KEY, roomconfig);  
-    roomFragment.setArguments(bundle);  
     FragmentManager fragmentManager = getSupportFragmentManager();  
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();  
     fragmentTransaction.replace(R.id.layout_fragment_container, roomFragment);  
