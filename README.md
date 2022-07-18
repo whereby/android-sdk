@@ -24,14 +24,13 @@ repositories {
  }
 ```
 
-Then, check the [most recent version released](https://github.com/whereby/android-sdk/releases) and fetch the framework in the module **build.gradle** file:
+Then, specify the version of the SDK you want to use by adding the following snippet to the module **build.gradle** file. You can select a specific version with `X.X.X` format (see the [list of released versions](https://github.com/whereby/android-sdk/releases)) or simply stay up-to-date by fetching the most recent one with the `main-SNAPSHOT` tag:
 ```gradle
 dependencies {  
     ...
-    def WHEREBY_SDK_VERSION = 'X.X.X'
+    def WHEREBY_SDK_VERSION = 'main-SNAPSHOT'
     implementation("com.github.whereby:android-sdk:$WHEREBY_SDK_VERSION@aar") { transitive = true }
 }
-
 ```
 *Remember to sync your project after updating the gradle files.*
 
@@ -128,13 +127,13 @@ android {
 
 6. We recommend to add the following `androidConfig` in the `AndroidManifest`, to avoid the activity to be destroyed and re-created on screen rotation:
     ```xml
-        <application
+    <application
+        ...
+        <activity
             ...
-            <activity
-                ...
-                android:configChanges="orientation|screenSize">
-            </activity>
-        </application>
+            android:configChanges="orientation|screenSize">
+        </activity>
+    </application>
     ```
     
 ## Disclaimer
