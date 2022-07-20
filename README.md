@@ -24,11 +24,11 @@ repositories {
  }
 ```
 
-Then, specify the version of the SDK you want to use by adding the following snippet to the module **build.gradle** file. You can select a specific version with `X.X.X` format (see the [list of released versions](https://github.com/whereby/android-sdk/releases)) or simply stay up-to-date by fetching the most recent one with the `main-SNAPSHOT` tag:
+Then, add the Whereby SDK dependency to your module **build.gradle** file. You can specify either a full name `X.X.X` version (see the [list of released versions](https://github.com/whereby/android-sdk/releases)) or simply use a range format `X.+`:
 ```gradle
 dependencies {  
     ...
-    def WHEREBY_SDK_VERSION = 'main-SNAPSHOT'
+    def WHEREBY_SDK_VERSION = '0.+'
     implementation("com.github.whereby:android-sdk:$WHEREBY_SDK_VERSION@aar") { transitive = true }
 }
 ```
