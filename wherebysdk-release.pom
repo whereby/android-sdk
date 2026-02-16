@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.whereby</groupId>
   <artifactId>sdk</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-b</version>
   <packaging>aar</packaging>
   <dependencies>
     <dependency>
