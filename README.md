@@ -55,7 +55,8 @@ android {
 
 2. Provide the room URL. The room URL would usually be created by your own backend using Whereby API (for more details see [Creating and deleting rooms](https://docs.whereby.com/creating-and-deleting-rooms)):
     ```java
-    String roomUrlString = "https://whereby-room-url";
+    // Replace with your own:
+    String urlString = "https://whereby-room-url";
     ```
 
 3. Create a *WherebyRoomConfig*:
