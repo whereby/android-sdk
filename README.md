@@ -24,11 +24,11 @@ repositories {
  }
 ```
 
-Then, add the Whereby SDK dependency to your module **build.gradle** file. You can specify either a full name `X.X.X` version (see the [list of released versions](https://github.com/whereby/android-sdk/releases)) or simply use a range format `X.+`:
+Then, add the Whereby SDK dependency to your module **build.gradle** file. You can specify either a full version name `X.X.X` (see the [list of released versions](https://github.com/whereby/android-sdk/releases)) or simply use a range format `X.+`:
 ```gradle
 dependencies {  
     ...
-    def WHEREBY_SDK_VERSION = '0.+'
+    def WHEREBY_SDK_VERSION = '1.+'
     implementation("com.github.whereby:android-sdk:$WHEREBY_SDK_VERSION@aar") { transitive = true }
 }
 ```
@@ -55,46 +55,37 @@ android {
 
 2. Provide the room URL. The room URL would usually be created by your own backend using Whereby API (for more details see [Creating and deleting rooms](https://docs.whereby.com/creating-and-deleting-rooms)):
     ```java
-    URL roomURL = new URL("https://...");
+    String roomUrlString = "https://whereby-room-url";
     ```
 
 3. Create a *WherebyRoomConfig*:
     ```java
-    WherebyRoomConfig roomConfig = new WherebyRoomConfig(roomURL);
+    WherebyRoomConfig config = new WherebyRoomConfig(urlString);
     ```
 
     Optionally, you can customize the room:
     ```java
-    roomConfig.setCameraEnabledAtStart(true);  
-    roomConfig.setMicrophoneEnabledAtStart(true); 
-    roomConfig.setDisplayName("Participant name");  
+    config.setDisplayName("Participant name");
+    config.setRoomBackgroundVisible(false); 
     // ...
     ```
-4. Setup your `WherebyRoomFragment` with its arguments in your source file and layout:
+4. Setup your `WherebyRoomFragment` in your source file (and layout):
     ```java
-    WherebyRoomFragment roomFragment = new WherebyRoomFragment();
-    Bundle bundle = new Bundle();  
-    bundle.putSerializable(ROOM_CONFIG_KEY, roomconfig);  
-    roomFragment.setArguments(bundle);  
+    WherebyRoomFragment fragment = WherebyRoomFragment.newInstance(config);
     ```
-    ```xml
-    <FrameLayout  
-      android:id="@+id/layout_whereby_fragment_container"  
-      .../>
-     ```
      
     Optionally, you can setup an asynchronous event listener. This allows to receive events during the meeting through a list of callbacks methods:
     ```java
-    roomFragment.setEventListener(new WherebyEventListener() {  
+    fragment.setListener(new WherebyRoomListener() {
     
         @Override  
         public void onMicrophoneToggled(boolean enabled) {  
-            // Update custom microphone button, for instance
+            // Update custom microphone button
         }  
       
         @Override  
         public void onCameraToggled(boolean enabled) {  
-            // Update custom camera button, for instance
+            // Update custom camera button
         }  
     
         // ...
@@ -103,26 +94,25 @@ android {
 
     You can also create your own buttons to send commands once the meeting has started:
     ```java
-    toggleCameraButton.setOnClickListener(view -> roomFragment.toggleCameraEnabled());  
-    toggleMicrophoneButton.setOnClickListener(view -> roomFragment.toggleMicrophoneEnabled());
+    toggleCameraButton.setOnClickListener(view -> fragment.toggleCameraEnabled());  
+    toggleMicrophoneButton.setOnClickListener(view -> fragment.toggleMicrophoneEnabled());
     ```
 
-5. Load the fragment and join the meeting:
+5. Load the fragment to join the meeting:
     ```java
-    FragmentManager fragmentManager = getSupportFragmentManager();  
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();  
-    fragmentTransaction.replace(R.id.layout_fragment_container, roomFragment);  
-    fragmentTransaction.commit();  
-    roomFragment.join();
+    getSupportFragmentManager()
+      .beginTransaction()
+      .replace(layout_whereby_fragment_container, fragment, TAG_ROOM_FRAGMENT)
+      .commit();
     ```
 
     Then, the fragment can be removed after the meeting has ended:
     ```java
-    FragmentManager fragmentManager = getSupportFragmentManager();  
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();  
-    fragmentTransaction.remove(mRoomFragment);  
-    fragmentTransaction.commit();  
-    mRoomFragment = null;
+    FragmentManager fm = getSupportFragmentManager();
+    Fragment existing = fm.findFragmentByTag(TAG_ROOM_FRAGMENT);
+    fm.beginTransaction()
+      .remove(existing)
+      .commit();
     ```
 
 6. We recommend to add the following `androidConfig` in the `AndroidManifest`, to avoid the activity to be destroyed and re-created on screen rotation:
@@ -142,3 +132,4 @@ Whereby publishes these packages to help the developer community understand how 
 Whereby does not recommend using such examples in a production environment without a prior assessment and appropriate testing relevant to the production setup targeted which can be of operational, technical, security or legal (e.g. library licenses assessment) nature. You expressly agree that the use of these packages is at your sole risk.
 
 Whereby, its affiliates, suppliers, or licensors, whether express or implied, do not make any representation, warranties, contractual commitments, conditions, or assurances by the operation of these examples, or the information, content, materials, therein.
+
